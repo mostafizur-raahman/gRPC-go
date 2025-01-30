@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"net"
 
 	proto "github.com/mostafizur-raahman/gRPC-go/protoc"
@@ -28,4 +30,11 @@ func main() {
 	if err := srv.Serve(listener); err != nil {
 		panic(err)
 	}
+}
+
+func (s *server) ServerReply(c context.Context, r *proto.HelloRequest) (*proto.HelloResponse, error) {
+	fmt.Println("Received request ....", r.Request)
+	fmt.Println("Send response...")
+
+	return &proto.HelloResponse{}, nil
 }
